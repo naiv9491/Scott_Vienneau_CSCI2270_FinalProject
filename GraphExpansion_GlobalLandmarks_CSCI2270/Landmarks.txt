@@ -1,0 +1,11 @@
+landmarks,Eiffel Tower,Giza Pyramid,Golden Gate Bridge,Great Wall of China,Niagara Falls,Sistine Chapel,Statue of Liberty,Stonehenge,Sydney Opera House,Taj Mahal
+Eiffel Tower,0,1998,-1,5092,-1,-1,3633,244,-1,-1
+Giza Pyramid,1998,0,-1,-1,-1,1328,-1,-1,-1,2829
+Golden Gate Bridge,-1,-1,0,-1,2619,6247,2566,-1,-1,-1
+Great Wall of China,5092,-1,-1,0,-1,-1,-1,5110,5590,2368
+Niagara Falls,-1,-1,2619,-1,0,-1,308,3507,-1,-1
+Sistine Chapel,-1,1328,6247,-1,-1,0,4287,-1,-1,-1
+Statue of Liberty,3633,-1,2566,-1,308,4287,0,3405,-1,-1
+Stonehenge,244,-1,-1,5110,3507,-1,3405,0,-1,-1
+Sydney Opera House,-1,-1,-1,5590,-1,-1,-1,-1,0,6386
+Taj Mahal,-1,2829,-1,2368,-1,-1,-1,-1,6386,0
