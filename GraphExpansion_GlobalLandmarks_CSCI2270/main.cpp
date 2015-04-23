@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
-#include "include/Graph.h"
+#include "Graph.h"
 
 using namespace std;
 
@@ -13,7 +13,7 @@ int main()
     int **landmarkDistanceValues;      //Dynamic two dimensional array to store distances between landmarks
 
 
-    int numLines = 0;  //Variable to store the number of lines in the file
+    int numLines = -1;  //Variable to store the number of lines in the file
 
     Graph g;    //Create an instance of the graph class
 
@@ -56,7 +56,10 @@ int main()
             comma2 = strLine.find(',', comma2+1);
         }
 
-        landmarks[numLines-2] = strLine.substr(comma1+1);
+
+        //Create variable line length to get the last landmark name in the file without getting the extra \r sequence
+        int lineLength = strLine.substr(comma1+1).length();
+        landmarks[numLines-2] = strLine.substr(comma1+1, lineLength-1);
 
         int index = 0;  //Variable to keep track of all of the lines traversed in the file
 
@@ -88,7 +91,10 @@ int main()
 
     //Add all landmarks to the graph as vertices
     for(int k = 0; k < numLines-1; k++)
+    {
         g.addVertex(landmarks[k]);
+    }
+
 
     //Loop through the 2d array and add all edges on the graph between vertices
     for(int i = 0; i < numLines-1; i++)
@@ -101,6 +107,7 @@ int main()
                 g.addEdge(landmarks[i], landmarks[j], landmarkDistanceValues[i][j]);
                 //If one edge was already created, set the corresponding value to -10 so two edges are not created for the same vertices
                 landmarkDistanceValues[j][i] = -10;
+
             }
         }
     }
@@ -122,6 +129,7 @@ int main()
         if(userInput == "1")
         {
             //Print out the vertices and corresponding edges
+            g.displayEdges();   //Call the display edges method
         }
 
         else if(userInput == "2")

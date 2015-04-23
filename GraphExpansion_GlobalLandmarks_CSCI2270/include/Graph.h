@@ -34,12 +34,12 @@ public:
     void addEdge(std::string v1, std::string v2, int weight);   // Add edge to graph
     void addVertex(std::string name);   //Add vertex to graph
     void displayEdges();    //Display all edges and vertices in the graph
-    void bredthFirstSearch(std::string startCity, std::string endCity); //Search the graph using breadth-first search
+    void breadthFirstSearch(std::string startCity, std::string endCity); //Search the graph using breadth-first search
     void depthFirstSearchRecursive(std::string startCity, std::string endCity);   //Search the graph using depth-first search recursively
     void depthFirstSearch(std::string startCity, std::string endCity);  //Search the graph using depth-first search non-recursive
     void dijkstra(std::string startCity, std::string endCity);  //Search the graph and find shortest distance using Dijkstra's algorithm
     void bruteForceSpanning(std::string startCity);    //Find the minimum spanning tree using a brute force algorithm
-    void primm(std::string startCity);    //Find the minimum spanning tree using Primm's algorithm
+    void primmSpanning(std::string startCity);    //Find the minimum spanning tree using Primm's algorithm
 
 protected:
 private:

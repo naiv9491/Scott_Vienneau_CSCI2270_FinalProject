@@ -1,5 +1,6 @@
 #include "Graph.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -41,7 +42,7 @@ void Graph::addVertex(string name)
         if(vertices[i].name == name)
         {
             found = true;
-            cout<<vertices[i].name<<" found."<<endl;
+            cout<< vertices[i].name<<" found."<<endl;
         }
     }
 
@@ -50,8 +51,8 @@ void Graph::addVertex(string name)
     if(found == false){
         vertex v;
         v.name = name;
-        vertices.push_back(v);
         v.distance = 0;
+        vertices.push_back(v);
     }
 }
 
@@ -100,5 +101,42 @@ void Graph::addEdge(string v1, string v2, int weight)
                 }
             }
         }
+    }
+}
+
+/*
+Function Prototype:
+void Graph::displayEdges()
+
+Function Description:
+This method takes in no parameters and displays all vertices with their corresponding adjacent vertices
+
+Example:
+Graph g;
+g.displayEdges();
+
+Precondition: The vertices vector has to be declared and the vertex struct has to be declared and initialized with the name variable. The adjacent vertices vector has to
+be declared as well with the pointer to the vertex struct
+
+Postcondition: All vertices will be displayed with a following list displaying all adjacent vertices to the original vertex.
+*/
+void Graph::displayEdges()
+{
+    //Loop through all vertices
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        //cout << vertices[i].name << endl;
+        cout << vertices[i].name << "-->";
+
+        //For each vertex, loop through all adjacent vertices
+        for(int j = 0; j < vertices[i].adj.size(); j++)
+        {
+            cout << vertices[i].adj[j].v->name;
+            if(j != vertices[i].adj.size()-1)
+                cout << "***";
+        }
+
+        cout << endl << endl;
+
     }
 }
