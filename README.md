@@ -15,6 +15,7 @@ How to Run
 ------------
 Dependencies
 ------------
+Our program does use some functionality from C++ 11, so whatever compiler you are using must be able to recognize those functions calls. Depending on the IDE/Compiler, there are settings which can enable the compiler to recognize C++ 11.
 
 -------------------
 System Requirements
@@ -28,7 +29,9 @@ Tyler Scott & Michael Vienneau
 ------------
 Contributors
 ------------
+There have been no contributors thus far.
 
 ------------------
 Open Issues & Bugs
 ------------------
+There are no issues/bugs thus far.
