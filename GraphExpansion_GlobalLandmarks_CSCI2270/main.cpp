@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include "include/Graph.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ int main()
 
     int numLines = 0;  //Variable to store the number of lines in the file
 
-    //Graph g;    //Create an instance of the graph class
+    Graph g;    //Create an instance of the graph class
 
     inFile.open("Landmarks.txt");    //Open the file to read in the data
 
@@ -85,8 +86,6 @@ int main()
 
     inFile.close();
 
-    /*
-
     //Add all landmarks to the graph as vertices
     for(int k = 0; k < numLines-1; k++)
         g.addVertex(landmarks[k]);
@@ -96,15 +95,15 @@ int main()
     {
         for(int j = 0; j < numLines-1; j++)
         {
+            //Make sure the distance value is greater than 0
             if(landmarkDistanceValues[i][j] > 0)
             {
                 g.addEdge(landmarks[i], landmarks[j], landmarkDistanceValues[i][j]);
-                //If one edge was already created, set the corresponding value to -10 so two edges are not created
+                //If one edge was already created, set the corresponding value to -10 so two edges are not created for the same vertices
                 landmarkDistanceValues[j][i] = -10;
             }
         }
     }
-    */
 
     LOOP:while(1 == 1)
     {
