@@ -119,8 +119,9 @@ int main()
         cout << "1. Print Vertices" << endl;
         cout << "2. Find Shortest Path" << endl;
         cout << "3. Find Shortest Distance" << endl;
-        cout << "4. Minimum Spanning Tree Algorithms" << endl;
-        cout << "5. Quit" << endl;
+        cout << "4. Primm's Minimum Spanning Tree Algorithm" << endl;
+        cout << "5. Brute Force Traveling Salesman Problem" << endl;
+        cout << "6. Quit" << endl;
 
         //Get user input on what option to run
         string userInput = "";
@@ -194,39 +195,25 @@ int main()
 
         else if(userInput == "4")
         {
-            //Print sub menu to display which minimum spanning tree algorithm
-            cout << endl << "1. Brute Force Algorithm" << endl;
-            cout << "2. Primm's Algorithm" << endl;
-
-            //Get user input on which algorithm to run
-            userInput = "";
-            getline(cin, userInput);
-
-            //Variable to store the name of the starting city for minimum spanning tree
+            //Find the minimum spanning tree using Primm
             string city1;
+            cout << "Enter a starting city:" << endl;
+            getline(cin, city1);
+            userInput = ""; //Reset the value of the user input
 
-            if(userInput == "1")
-            {
-                //Find the minimum spanning tree using brute force
-                cout << "Enter a starting city:" << endl;
-                getline(cin, city1);
-                userInput = ""; //Reset the value of the user input
-            }
-            else if(userInput == "2")
-            {
-                //Find the minimum spanning tree using Primm
-                cout << "Enter a starting city:" << endl;
-                getline(cin, city1);
-                userInput = ""; //Reset the value of the user input
-            }
-            else
-            {
-                cout << "Invalid Input, restarting from Main Menu" << endl;
-                goto LOOP;  //Go back to main menu
-            }
         }
 
         else if(userInput == "5")
+        {
+            //Solve the traveling salesman problem using brute force
+            string city1;
+            cout << "Enter a starting city:" << endl;
+            getline(cin, city1);
+            userInput = "";
+
+        }
+
+        else if(userInput == "6")
         {
             //If user wants to quit
             cout << "Goodbye!" << endl;
