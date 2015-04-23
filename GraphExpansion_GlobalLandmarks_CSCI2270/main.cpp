@@ -105,5 +105,135 @@ int main()
         }
     }
     */
+
+    LOOP:while(1 == 1)
+    {
+        //Print out the main menu with all options
+        cout << "===== Main Menu =====" << endl;
+        cout << "1. Print Vertices" << endl;
+        cout << "2. Find Shortest Path" << endl;
+        cout << "3. Find Shortest Distance" << endl;
+        cout << "4. Minimum Spanning Tree Algorithms" << endl;
+        cout << "5. Quit" << endl;
+
+        //Get user input on what option to run
+        string userInput = "";
+        getline(cin, userInput);
+
+        if(userInput == "1")
+        {
+            //Print out the vertices and corresponding edges
+        }
+
+        else if(userInput == "2")
+        {
+            //Print sub-menu to show which shortest path algorithm
+            cout << endl << "1. Breadth-First Search" << endl;
+            cout << "2. Depth-First Search Recursive" << endl;
+            cout << "3. Depth-First Search Non-Recursive" << endl;
+
+            //Get user input on which shortest path algorithm
+            userInput = "";
+            getline(cin, userInput);
+
+            //Two variables to keep track of each city
+            string city1;
+            string city2;
+
+            if(userInput == "1")
+            {
+                //Find the shortest path between two cities using breadth-first
+                cout << "Enter a starting city:" << endl;
+                getline(cin, city1);
+                cout << "Enter an ending city:" << endl;
+                getline(cin, city2);
+                userInput = ""; //Reset the value of userInput
+            }
+            else if(userInput == "2")
+            {
+                //Find the shortest path between two cities using depth-first recursive
+                cout << "Enter a starting city:" << endl;
+                getline(cin, city1);
+                cout << "Enter an ending city:" << endl;
+                getline(cin, city2);
+                userInput = "";
+            }
+            else if(userInput == "3")
+            {
+                //Find the shortest path between two cities using breadth-first
+                cout << "Enter a starting city:" << endl;
+                getline(cin, city1);
+                cout << "Enter an ending city:" << endl;
+                getline(cin, city2);
+                userInput = ""; //Reset the value of user input
+            }
+            else
+            {
+                cout << "Invalid Input, restarting from Main Menu" << endl;
+                goto LOOP;  //Go back to main menu
+            }
+        }
+
+        else if(userInput == "3")
+        {
+            //Find shortest distance between two cities using Dijkstra's algorithm
+            string city1;
+            string city2;
+            cout << "Enter a starting city:" << endl;
+            getline(cin, city1);
+            cout << "Enter an ending city:" << endl;
+            getline(cin, city2);
+        }
+
+        else if(userInput == "4")
+        {
+            //Print sub menu to display which minimum spanning tree algorithm
+            cout << endl << "1. Brute Force Algorithm" << endl;
+            cout << "2. Primm's Algorithm" << endl;
+
+            //Get user input on which algorithm to run
+            userInput = "";
+            getline(cin, userInput);
+
+            //Variable to store the name of the starting city for minimum spanning tree
+            string city1;
+
+            if(userInput == "1")
+            {
+                //Find the minimum spanning tree using brute force
+                cout << "Enter a starting city:" << endl;
+                getline(cin, city1);
+                userInput = ""; //Reset the value of the user input
+            }
+            else if(userInput == "2")
+            {
+                //Find the minimum spanning tree using Primm
+                cout << "Enter a starting city:" << endl;
+                getline(cin, city1);
+                userInput = ""; //Reset the value of the user input
+            }
+            else
+            {
+                cout << "Invalid Input, restarting from Main Menu" << endl;
+                goto LOOP;  //Go back to main menu
+            }
+        }
+
+        else if(userInput == "5")
+        {
+            //If user wants to quit
+            cout << "Goodbye!" << endl;
+            return 0;
+        }
+
+        else
+        {
+            //If the input is invalid
+            cout << "Invalid Input, restarting from Main Menu" << endl;
+            goto LOOP;
+        }
+
+    }
+
     return 0;
 }
