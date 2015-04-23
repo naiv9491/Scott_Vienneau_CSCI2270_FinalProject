@@ -32,14 +32,19 @@ public:
     void addEdge(std::string v1, std::string v2, int weight);
     void addVertex(std::string name);
     void displayEdges();
-    void findDistricts(std::string n);
-    void findShortestPath(std::string city1, std::string city2);
-    void findShortestDistance(std::string city1, std::string city2);
+    void bredthFirstSearch(std::string startCity, std::string endCity);
+    void depthFirstSearchRec(std::string startCity, std::string endCity);
+    void depthFirstSearch(std::string startCity, std::string endCity);
+    void dijkstra(std::string startCity, std::string endCity);
+    void bruteForceSpanning(std::startCity);
+    void prim(std::startCity);
+    
     int district;
 protected:
 private:
     //vector<edge> edges;
     std::vector<vertex> vertices;
+    void search(vertex v);
     
 };
 
