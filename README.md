@@ -6,7 +6,7 @@ Created by Tyler Scott and Michael Vienneau
 ---------------
 Project Summary
 ---------------
-Our project is an expansion on the Graph data structure. We will be implementing new traversal algorithms, as well as minimum spanning tree algorithms and other useful graph functions. The program will run by executing a driver file which will display a main menu allowing the user to select different options. The implementations for the graph methods will be included in a Graph class which will consist of a '.cpp' and '.h' file. The vertices and edges will be added by reading in a previously generated text file. The theme of the graph will be global landmarks and the edges will be weighted distances between each landmark.
+Our project is an expansion on the Graph data structure. We will be implementing new traversal algorithms, vertex and edge deletion, as well as other useful graph functions. The program will run by executing a driver file which will display a main menu allowing the user to select different options. The implementations for the graph methods will be included in a Graph class which will consist of a '.cpp' and '.h' file. The vertices and edges will be added by reading in a previously generated text file. The theme of the graph will be global landmarks and the edges will be weighted distances between each landmark.
 
 ----------
 How to Run
