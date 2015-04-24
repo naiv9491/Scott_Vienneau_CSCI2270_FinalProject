@@ -17,6 +17,7 @@ struct vertex{
     bool visited;   //If the vertex has been visited
     int distance;   //Distance from a starting vertex
     std::vector<adjVertex> adj; //Vector to store all adjacent vertices
+    vertex *previous;   //Pointer to point to the previous vertex for use in Dijkstra's algorithm
 };
 
 //Queue vertex used in Dijkstra'a algorithm
@@ -37,9 +38,7 @@ public:
     void depthFirstTraversalRecursive(std::string startLandmark);   //Search the graph using depth-first search recursively
     void depthFirstTraversal(std::string startLandmark);  //Search the graph using depth-first search non-recursive
     void dijkstra(std::string startLandmark, std::string endLandmark);  //Search the graph and find shortest distance using Dijkstra's algorithm
-    void bruteForceSpanning(std::string startLandmark);    //Find the minimum spanning tree using a brute force algorithm
-    void primmSpanning(std::string startLandmark);  //Find the minimum spanning tree using Primm's algorithm
-    void breadthFirstTraversal(std::string startLandmark);
+    void breadthFirstTraversal(std::string startLandmark);  //Traverse the graph according to the breadth first procedure
 
 protected:
 private:

@@ -187,6 +187,8 @@ LOOP:while(1 == 1)
         getline(cin, landmark1);
         cout << "Enter an ending landmark:" << endl;
         getline(cin, landmark2);
+
+        g.dijkstra(landmark1, landmark2);
     }
 
     else if(userInput == "4")

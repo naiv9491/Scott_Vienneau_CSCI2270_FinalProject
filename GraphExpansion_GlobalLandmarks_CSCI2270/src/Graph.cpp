@@ -3,6 +3,7 @@
 #include <iostream>
 #include <queue>
 #include <stack>
+#include <limits.h>
 
 using namespace std;
 
@@ -508,4 +509,172 @@ void Graph::breadthFirstTraversal(string startLandmark)
         }
     }
 
+}
+
+/*
+ Function Prototype:
+ void Graph::dijkstra(string, string)
+
+ Function Description: This method will find the shortest distance between two landmarks in a weighted graph.
+
+ Example:
+ Graph g;
+ g.dijkstra("Niagara Falls", "Eiffel Tower");
+
+ Precondition: The vertex struct and vertices vector must be implemented will all corresponding variables including the pointer to the previous vertex.
+ The vector class must be included and the adjacent vector/struct must be declared and implemented. The limits.h class must be included.
+
+ Postcondition: Will print the shortest distance between two landmarks and the string path taken between the landmarks.
+ */
+void Graph::dijkstra(string startLandmark, string endLandmark)
+{
+    //Create temp vertices for starting and ending landmark
+    vertex A;
+    A.name = "NULL";
+    vertex B;
+    B.name = "NULL";
+
+    vertex *finalLandmark;  //Vertex to store the final landmark of the shortest distance path
+
+    //Loop through the vertices looking for starting city and ending city
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        if(startLandmark == vertices[i].name)
+        {
+            A = vertices[i];
+        }
+
+        if(endLandmark == vertices[i].name && endLandmark != startLandmark)
+        {
+            B = vertices[i];
+        }
+    }
+
+    //If one or more cities is not found, one or more cities does not exist
+    if(A.name == "NULL" || B.name == "NULL")
+    {
+        cout << "One or more landmarks doesn't exist or the start and end landmark are the same" << endl;
+        return;
+    }
+
+    vertex *startingLandmark = NULL;
+    vertex temp;
+
+    int minDistance = 0;
+
+        //Loop through all of the vertices setting visited to false, previous to NULL, set each vertex distance to 0
+        for(int j = 0; j < vertices.size(); j++)
+        {
+            vertices[j].visited = false;
+            vertices[j].previous = NULL;
+            vertices[j].distance = 0;
+        }
+        A.visited = false;
+        B.visited = false;
+
+        //Loop and if you find starting landmark, set visited to true and set s to the starting landmark
+        for(int i = 0; i < vertices.size(); i++)
+        {
+            if(vertices[i].name == startLandmark)
+            {
+                vertices[i].visited = true;
+                vertices[i].previous = NULL;
+                startingLandmark = &vertices[i];
+                break;
+            }
+        }
+
+        //Set s to be visited and distance to be 0 since it is the starting landmark
+        startingLandmark->visited = true;
+        startingLandmark->distance = 0;
+        startingLandmark->previous = NULL;
+
+        //Indices to keep track of the landmark with the minimum distance and the adjacent landmark with the minimum distance
+        int minIndex = -1;
+        int minAdjIndex = -1;
+
+        int distance;   //Variable to store the temp distance measurement
+
+        //Create a vector of vertices which are solved
+        //Add starting landmark to solved
+        vector <vertex*> solved;
+        solved.push_back(startingLandmark);
+
+        //While the end landmark has not been visited
+        while(B.visited == false)
+        {
+            //Min distance is the max integer value
+            minDistance = INT_MAX;
+
+            //Loop through all vertices in solved
+            for(int k = 0; k < solved.size(); k++)
+            {
+                //Loop through all adjacent vertices in solved
+                for(int a = 0; a < solved[k]->adj.size(); a++)
+                {
+                    //If the adjacent vertex has not been visited
+                    if(solved[k]->adj[a].v->visited == false)
+                    {
+                        //Calculate the distance to the adjacent vertex
+                        distance = solved[k]->distance+solved[k]->adj[a].weight;
+
+                        //Set the minimum distance if it has not been set yet
+                        //Keep track of the minDistance index and minDistance adjacent vertex
+                        if(minDistance == INT_MAX)
+                        {
+                            minDistance = distance;
+                            minIndex = k;
+                            minAdjIndex = a;
+                        }
+                        //If the minimum distance is greater than the calculated distance
+                        //Keep track of the indexes just like above
+                        else if(minDistance > distance)
+                        {
+                            minDistance = distance;
+                            minIndex = k;
+                            minAdjIndex = a;
+                        }
+                    }
+                }
+            }
+            //Set min distance for the adjacent vertex
+            solved[minIndex]->adj[minAdjIndex].v->distance = minDistance;
+            //The adjacent vertex with minimum distance has now been visited
+            solved[minIndex]->adj[minAdjIndex].v->visited = true;
+
+            //Set the previous city for the visited adjacent vertex
+            solved[minIndex]->adj[minAdjIndex].v->previous = solved[minIndex];
+
+            //Set final to be the final adjacent vertex
+            //Final will keep track of the destination
+            finalLandmark = solved[minIndex]->adj[minAdjIndex].v;
+
+            //Check if the ending city has been visited
+            if(solved[minIndex]->adj[minAdjIndex].v->name == B.name)
+                B.visited = true;
+            //Add the minimum distance vertex to solved
+            solved.push_back(solved[minIndex]->adj[minAdjIndex].v);
+        }
+
+        //Create a vector for the final path
+        vector<vertex*> finalPath;
+
+        //Print the distance and the final path
+        cout << minDistance << ", ";
+
+        while(finalLandmark != NULL)
+        {
+            finalPath.push_back(finalLandmark);
+            finalLandmark = finalLandmark->previous;
+        }
+
+        for(int j = finalPath.size()-1; j >= 0; j--)
+        {
+            if(j != 0)
+                cout << finalPath[j]->name << ", ";
+            else
+                cout << finalPath[j]->name << endl;
+        }
+
+        return;
 }
