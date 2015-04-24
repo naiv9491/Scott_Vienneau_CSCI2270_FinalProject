@@ -129,58 +129,48 @@ LOOP:while(1 == 1)
     
     if(userInput == "1")
     {
-        //Print out the vertices and corresponding edges
-        g.displayEdges();   //Call the display edges method
+        cout << "1. Breadth First Traversal" << endl;
+        cout << "2. Depth First Traversal" << endl;
+        cout << "3. Depth First Traversal (Recursive)" << endl;
+        string city1;
+        userInput = "";
+        getline(cin, userInput);
+        if (userInput == "1"){
+            cout << "Enter a starting city:" << endl;
+            getline(cin, city1);
+            userInput = "";
+            g.breadthFirstTraversal(city1);
+        }else if (userInput == "2"){
+            cout << "Enter a starting city:" << endl;
+            getline(cin, city1);
+            userInput = "";
+            g.depthFirstPrint(city1);
+        }else if (userInput == "3"){
+            cout << "Enter a starting city:" << endl;
+            getline(cin, city1);
+            userInput = "";
+            g.depthFirstTraversalRecursive(city1);
+        }
+        
     }
     
     else if(userInput == "2")
     {
-        //Print sub-menu to show which shortest path algorithm
-        cout << endl << "1. Breadth-First Search" << endl;
-        cout << "2. Depth-First Search Recursive" << endl;
-        cout << "3. Depth-First Search Non-Recursive" << endl;
-        
-        //Get user input on which shortest path algorithm
-        userInput = "";
-        getline(cin, userInput);
         
         //Two variables to keep track of each city
         string city1;
         string city2;
         
-        if(userInput == "1")
-        {
-            //Find the shortest path between two cities using breadth-first
-            cout << "Enter a starting city:" << endl;
-            getline(cin, city1);
-            cout << "Enter an ending city:" << endl;
-            getline(cin, city2);
-            userInput = ""; //Reset the value of userInput
-            g.breadthFirstSearch(city1, city2);
-        }
-        else if(userInput == "2")
-        {
-            //Find the shortest path between two cities using depth-first recursive
-            cout << "Enter a starting city:" << endl;
-            getline(cin, city1);
-            cout << "Enter an ending city:" << endl;
-            getline(cin, city2);
-            userInput = "";
-        }
-        else if(userInput == "3")
-        {
-            //Find the shortest path between two cities using breadth-first
-            cout << "Enter a starting city:" << endl;
-            getline(cin, city1);
-            cout << "Enter an ending city:" << endl;
-            getline(cin, city2);
-            userInput = ""; //Reset the value of user input
-        }
-        else
-        {
-            cout << "Invalid Input, restarting from Main Menu" << endl;
-            goto LOOP;  //Go back to main menu
-        }
+        //Find the shortest path between two cities using breadth-first
+        cout << "Enter a starting city:" << endl;
+        getline(cin, city1);
+        cout << "Enter an ending city:" << endl;
+        getline(cin, city2);
+        userInput = ""; //Reset the value of userInput
+        g.breadthFirstSearch(city1, city2);
+        
+        
+        
     }
     
     else if(userInput == "3")

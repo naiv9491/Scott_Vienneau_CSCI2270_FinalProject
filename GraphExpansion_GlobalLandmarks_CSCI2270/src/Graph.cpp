@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -121,26 +122,30 @@ void Graph::addEdge(string v1, string v2, int weight)
  
  Postcondition: All vertices will be displayed with a following list displaying all adjacent vertices to the original vertex.
  */
-void Graph::displayEdges()
-{
-    //Loop through all vertices
-    for(int i = 0; i < vertices.size(); i++)
-    {
-        //cout << vertices[i].name << endl;
-        cout << vertices[i].name << "-->";
-        
-        //For each vertex, loop through all adjacent vertices
-        for(int j = 0; j < vertices[i].adj.size(); j++)
-        {
-            cout << vertices[i].adj[j].v->name;
-            if(j != vertices[i].adj.size()-1)
-                cout << "***";
-        }
-        
-        cout << endl << endl;
-        
-    }
-}
+
+/*
+ void Graph::displayEdges()
+ {
+ //Loop through all vertices
+ for(int i = 0; i < vertices.size(); i++)
+ {
+ //cout << vertices[i].name << endl;
+ cout << vertices[i].name << "-->";
+ 
+ //For each vertex, loop through all adjacent vertices
+ for(int j = 0; j < vertices[i].adj.size(); j++)
+ {
+ cout << vertices[i].adj[j].v->name;
+ if(j != vertices[i].adj.size()-1)
+ cout << "***";
+ }
+ 
+ cout << endl << endl;
+ 
+ }
+ }
+ */
+
 /*
  Function Prototype:
  void Graph::breadthFirstSearch(string, string)
@@ -228,5 +233,157 @@ void Graph::breadthFirstSearch(string city1, string city2){
     }
     
     
+    
+}
+/*
+ Function Prototype:
+ void Graph::debthFirstPrint(string)
+ 
+ Function Description: This method prints all the vertices accordin to the 'depth first' traversal procedure
+ 
+ Example:
+ Graph g;
+ g.depthFirstPrint("Eiffel Tower");
+ 
+ Precondition: The string parameter has no extra spaces, and is the correct name of the landmark. The struct vertex has been declared with name and distance variables.
+ The vertices vector has been declared.
+ 
+ Postcondition: Will display all the vertices in the graph, in order according to depth first traversal
+ */
+void Graph::depthFirstPrint(string startCity){
+    int tracker = 0;
+    vertex *s = NULL;
+    for (int i = 0; i < vertices.size(); i ++){
+        vertices[i].visited = false;
+        if (vertices[i].name == startCity){
+            s = &vertices[i];
+            vertices[i].visited = true;
+        }
+    }
+    vertex u;
+    stack<vertex> stack;
+    stack.push(*s);
+    while (!(stack.empty())){
+        u = stack.top();
+        stack.pop();
+        tracker++;
+        bool visited = true;
+        if (tracker == 10){
+            cout << u.name << endl;
+        }else {
+            cout << u.name << ", ";
+        }
+        
+        for (int i = 0; i < u.adj.size(); i++){
+            if (u.adj[i].v->visited == false){
+                u.adj[i].v->visited = true;
+                stack.push(*u.adj[i].v);
+            }
+            
+            
+        }
+    }
+    
+}
+/*
+ Function Prototype:
+ void Graph::depthFirstTraversalRecursive(string)
+ 
+ Function Description: This method prints all the vertices accordin to the 'depth first' recursive traversal procedure
+ 
+ Example:
+ Graph g;
+ g.depthFirstTraversalRecursive("Eiffel Tower");
+ 
+ Precondition: The string parameter has no extra spaces, and is the correct name of the landmark. The struct vertex has been declared with name and distance variables.
+ The vertices vector has been declared.
+ 
+ Postcondition: Will display all the vertices in the graph, in order according to depth first recursive traversal
+ */
+void Graph::depthFirstTraversalRecursive(string startCity){
+    vertex *s = NULL;
+    for (int i = 0; i < vertices.size(); i++){
+        if (vertices[i].name == startCity){
+            vertices[i].visited = true;
+            s = &vertices[i];
+        }else{
+            vertices[i].visited = false;
+        }
+    }
+    cout << s->name << ", ";
+    for (int i = 0; i < s->adj.size(); i++){
+        if (s->adj[i].v->visited == false){
+            cout << s->adj[i].v->name << ", ";
+            s->adj[i].v->visited = true;
+            search(*s->adj[i].v);
+            
+        }
+    }
+    cout << endl;
+    
+}
+
+
+void Graph::search(vertex u){
+    u.visited = true;
+    for (int i = 0; i < u.adj.size(); i++){
+        if (u.adj[i].v->visited == false){
+            u.adj[i].v->visited = true;
+            bool visited = true;
+            for (int i = 0; i < vertices.size(); i ++){
+                if (vertices[i].visited == false){
+                    visited = false;
+                }
+            }
+            if (visited){
+                cout << u.adj[i].v->name << endl;
+            }else{
+                cout << u.adj[i].v->name << ", ";
+            }
+            search(*u.adj[i].v);
+            
+        }
+    }
+}
+
+void Graph::breadthFirstTraversal(string startCity){
+    vertex *s = NULL;
+    for (int i = 0; i < vertices.size(); i ++){
+        vertices[i].visited = false;
+        if (vertices[i].name == startCity){
+            s = &vertices[i];
+            vertices[i].visited = true;
+        }
+    }
+    cout << s->name << ", ";
+    vertex u;
+    queue<vertex> queue;
+    queue.push(*s);
+    while (!(queue.empty())){
+        u = queue.front();
+        queue.pop();
+        bool visited = true;
+        
+        for (int i = 0; i < u.adj.size(); i++){
+            if (u.adj[i].v->visited == false){
+                u.adj[i].v->visited = true;
+                bool visited = true;
+                for (int i = 0; i < vertices.size(); i ++){
+                    if (vertices[i].visited == false){
+                        visited = false;
+                    }
+                }
+                if (visited){
+                    cout << u.adj[i].v->name << endl;
+                }else{
+                    cout << u.adj[i].v->name << ", ";
+                }
+                
+                queue.push(*u.adj[i].v);
+            }
+            
+            
+        }
+    }
     
 }

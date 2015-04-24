@@ -33,21 +33,21 @@ public:
     ~Graph();   //Destructor
     void addEdge(std::string v1, std::string v2, int weight);   // Add edge to graph
     void addVertex(std::string name);   //Add vertex to graph
-    void displayEdges();    //Display all edges and vertices in the graph
     void breadthFirstSearch(std::string startCity, std::string endCity); //Search the graph using breadth-first search
-    void depthFirstSearchRecursive(std::string startCity, std::string endCity);   //Search the graph using depth-first search recursively
-    void depthFirstSearch(std::string startCity, std::string endCity);  //Search the graph using depth-first search non-recursive
+    void depthFirstTraversalRecursive(std::string startCity);   //Search the graph using depth-first search recursively
+    void depthFirstPrint(std::string startCity);  //Search the graph using depth-first search non-recursive
     void dijkstra(std::string startCity, std::string endCity);  //Search the graph and find shortest distance using Dijkstra's algorithm
     void bruteForceSpanning(std::string startCity);    //Find the minimum spanning tree using a brute force algorithm
-    void primmSpanning(std::string startCity);    //Find the minimum spanning tree using Primm's algorithm
-
+    void primmSpanning(std::string startCity);  //Find the minimum spanning tree using Primm's algorithm
+    void breadthFirstTraversal(std::string startCity);
+    
 protected:
 private:
     //vector<edge> edges;
     std::vector<vertex> vertices;   //Vector store all vertices
-
+    
     void search(vertex v);  //Algorithm used with depth-first search recursive
-
+    
 };
 
 #endif // GRAPH_H
