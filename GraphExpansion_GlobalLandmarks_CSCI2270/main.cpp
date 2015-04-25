@@ -48,7 +48,7 @@ int main()
         int comma1 = strLine.find(',');
         int comma2 = strLine.find(',', comma1+1);
 
-        for(int i = 0; i < numLines-2; i++)
+        for(int i = 0; i < numLines-1; i++)
         {
             //Loop through just the first line adding in all landmarks to the landmarks array
             landmarks[i] = strLine.substr(comma1+1, comma2-comma1-1);
@@ -58,8 +58,8 @@ int main()
 
 
         //Create variable line length to get the last landmark name in the file without getting the extra \r sequence
-        int lineLength = strLine.substr(comma1+1).length();
-        landmarks[numLines-2] = strLine.substr(comma1+1, lineLength-1);
+        //int lineLength = strLine.substr(comma1+1).length();
+        //landmarks[numLines-2] = strLine.substr(comma1+1, lineLength-1);
 
         int index = 0;  //Variable to keep track of all of the lines traversed in the file
 
@@ -120,9 +120,8 @@ LOOP:while(1 == 1)
     cout << "2. Initialize Districts" << endl;
     cout << "3. Find Shortest Path" << endl;
     cout << "4. Find Shortest Distance" << endl;
-    cout << "5. Delete Vertex" << endl;
-    cout << "6. Delete Edge" << endl;
-    cout << "7. Quit" << endl;
+    cout << "5. Delete Edge" << endl;
+    cout << "6. Quit" << endl;
 
     //Get user input on what option to run
     string userInput = "";
@@ -201,29 +200,19 @@ LOOP:while(1 == 1)
 
     else if(userInput == "5")
     {
-        //Find the minimum spanning tree using Primm
-        string landmark1;
-        cout << "Enter a starting landmark:" << endl;
-        getline(cin, landmark1);
-        userInput = ""; //Reset the value of the user input
-
-    }
-
-    else if(userInput == "6")
-    {
-        //Solve the traveling salesman problem using brute force
+        //Delete the edge between two vertices
         string landmark1;
         string landmark2;
         cout << "Enter a starting landmark:" << endl;
         getline(cin, landmark1);
-        cout << "Enter an ending landmark:" << endl;
+        cout << "Enter an adjacent landmark:" << endl;
         getline(cin, landmark2);
         userInput = "";
 
         g.deleteEdge(landmark1, landmark2);
     }
 
-    else if(userInput == "7")
+    else if(userInput == "6")
     {
         //If user wants to quit
         cout << "Goodbye!" << endl;

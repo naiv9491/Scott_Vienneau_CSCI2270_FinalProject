@@ -131,6 +131,7 @@ void Graph::breadthFirstSearch(string landmark1, string landmark2)
     int distance;   //Integer to store temporary distance of path
 
     vertex *startingLandmark = NULL;    //Vertex to store the starting landmark
+    vertex *endingLandmark = NULL;  //Vertex to store the ending vertex
 
     vertex u;   //Vertex to store the current vertex
 
@@ -151,12 +152,18 @@ void Graph::breadthFirstSearch(string landmark1, string landmark2)
         else if (vertices[i].name == landmark2)
         {
             landmarks2 = true;
+            endingLandmark = &vertices[i];
         }
     }
 
     if(startingLandmark->districtID == -1)
     {
         cout << "Districts have not been initialized" << endl;
+        return;
+    }
+    else if(startingLandmark->districtID != endingLandmark->districtID)
+    {
+        cout << "The two landmarks are in different districts" << endl;
         return;
     }
 
@@ -219,7 +226,7 @@ void Graph::breadthFirstSearch(string landmark1, string landmark2)
                         cout << temp.distance;
                         for (int j = 0; j < temp.path.size(); j++)
                         {
-                            cout << "," << temp.path[j].name;
+                            cout << " " << temp.path[j].name;
                         }
                     }
                     else
@@ -309,7 +316,7 @@ void Graph::depthFirstTraversal(string startLandmark)
         }
         else
         {
-            cout << u.districtID << ":" << u.name << ", ";
+            cout << u.districtID << ":" << u.name << " ";
         }
 
         //Loop through all adjacent vertices, visit them, and push them onto the stack
@@ -373,14 +380,14 @@ void Graph::depthFirstTraversalRecursive(string startLandmark)
         return;
     }
 
-    cout << startingLandmark->districtID << ":" << startingLandmark->name << ", ";    //Print out the starting landmark
+    cout << startingLandmark->districtID << ":" << startingLandmark->name << " ";    //Print out the starting landmark
 
     //Loop through all adjacent vertices to starting landmark and print it out
     for (int i = 0; i < startingLandmark->adj.size(); i++)
     {
         if (startingLandmark->adj[i].v->visited == false)
         {
-            cout << startingLandmark->adj[i].v->districtID << ":" << startingLandmark->adj[i].v->name << ", ";
+            cout << startingLandmark->adj[i].v->districtID << ":" << startingLandmark->adj[i].v->name << " ";
             startingLandmark->adj[i].v->visited = true;
 
             //Call the search method to start printing out all adjacent vertices depth first
@@ -388,6 +395,7 @@ void Graph::depthFirstTraversalRecursive(string startLandmark)
 
         }
     }
+    cout << endl;
 
 }
 
@@ -432,7 +440,7 @@ void Graph::search(vertex u)
             }
             else
             {
-                cout << u.adj[i].v->districtID << ":" << u.adj[i].v->name << ", ";
+                cout << u.adj[i].v->districtID << ":" << u.adj[i].v->name << " ";
             }
 
             //Recursively call search with the adjacent vertex to print all vertices with depth first
@@ -487,7 +495,7 @@ void Graph::breadthFirstTraversal(string startLandmark)
         return;
     }
 
-    cout << startingLandmark->districtID << ":" << startingLandmark->name << ", "; //Print out the starting landmark
+    cout << startingLandmark->districtID << ":" << startingLandmark->name << " "; //Print out the starting landmark
 
     vertex u;   //Vertex to store the vertex to be popped off the queue
 
@@ -524,7 +532,7 @@ void Graph::breadthFirstTraversal(string startLandmark)
                 }
                 else
                 {
-                    cout << u.adj[i].v->districtID << ":" << u.adj[i].v->name << ", ";
+                    cout << u.adj[i].v->districtID << ":" << u.adj[i].v->name << " ";
                 }
 
                 //Push the adjacent vertex onto the queue
@@ -532,6 +540,7 @@ void Graph::breadthFirstTraversal(string startLandmark)
             }
         }
     }
+    cout << endl;
 
 }
 
@@ -584,6 +593,11 @@ void Graph::dijkstra(string startLandmark, string endLandmark)
     if(A.districtID == -1)
     {
         cout << "Districts have not been initialized" << endl;
+        return;
+    }
+    else if(A.districtID != B.districtID)
+    {
+        cout << "The two landmarks are in different districts" << endl;
         return;
     }
 
@@ -856,37 +870,49 @@ void Graph::deleteEdge(string startLandmark, string endLandmark)
         cout << "Districts have not been initialized" << endl;
         return;
     }
+    else if(startingLandmark->districtID != endingLandmark->districtID)
+    {
+        cout << "The two landmarks have different districts" << endl;
+        return;
+    }
 
     //Boolean to store if the vertices are adjacent
     bool adjacentVertices = false;
 
     //Loop through all adjacent vertices for starting landmark and if end landmark is found, erase it
-    for(int i = 0; i < startingLandmark->adj.size(); i++)
+    for(int i = startingLandmark->adj.size()-1; i >= 0; i--)
     {
         if(startingLandmark->adj[i].v->name == endLandmark)
         {
             startingLandmark->adj.erase(startingLandmark->adj.begin()+i);
             adjacentVertices = true;
+            break;
         }
     }
 
     //If the vertices are not adjacent
     if(!adjacentVertices)
     {
-        cout << "The vertices are not connected" << endl;
+        cout << "The vertices are not adjacent" << endl;
         return;
     }
 
     //Loop through all adjacent vertices to ending landmark and delete starting landmark
-    for(int i = 0; i < endingLandmark->adj.size(); i++)
+    for(int i = endingLandmark->adj.size()-1; i >= 0; i--)
     {
         if(endingLandmark->adj[i].v->name == startLandmark)
         {
             endingLandmark->adj.erase(endingLandmark->adj.begin()+i);
+            break;
         }
     }
 
+
     //Re find all districts for the graph
+    districtIDIndex = 1;
+    for(int i = 0; i < vertices.size(); i++)
+        vertices[i].districtID = -1;
+
     findDistricts(startLandmark);
 
 }

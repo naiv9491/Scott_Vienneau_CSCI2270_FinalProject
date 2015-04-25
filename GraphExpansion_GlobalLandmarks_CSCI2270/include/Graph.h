@@ -41,7 +41,6 @@ public:
     void dijkstra(std::string startLandmark, std::string endLandmark);  //Search the graph and find shortest distance using Dijkstra's algorithm
     void breadthFirstTraversal(std::string startLandmark);  //Traverse the graph according to the breadth first procedure
     void findDistricts(std::string startLandmark);  //Method to assign all of the vertices a district
-    void deleteVertex(std::string startLandmark);   //Method to delete a vertex
     void deleteEdge(std::string startLandmark, std::string endLandmark);    //Method to delete an edge between vertices
 
 protected:
