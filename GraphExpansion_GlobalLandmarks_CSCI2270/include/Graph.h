@@ -42,15 +42,16 @@ public:
     void breadthFirstTraversal(std::string startLandmark);  //Traverse the graph according to the breadth first procedure
     void findDistricts(std::string startLandmark);  //Method to assign all of the vertices a district
     void deleteEdge(std::string startLandmark, std::string endLandmark);    //Method to delete an edge between vertices
-
+    void deleteVertex(std::string landMark);
+    
 protected:
 private:
     //vector<edge> edges;
     std::vector<vertex> vertices;   //Vector store all vertices
     int districtIDIndex;
-
+    
     void search(vertex v);  //Algorithm used with depth-first search recursive
-
+    
 };
 
 #endif // GRAPH_H
