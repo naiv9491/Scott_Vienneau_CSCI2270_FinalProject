@@ -18,6 +18,7 @@ struct vertex{
     int distance;   //Distance from a starting vertex
     std::vector<adjVertex> adj; //Vector to store all adjacent vertices
     vertex *previous;   //Pointer to point to the previous vertex for use in Dijkstra's algorithm
+    int districtID; //Integer to store the ID of the vertex district
 };
 
 //Queue vertex used in Dijkstra'a algorithm
@@ -39,11 +40,15 @@ public:
     void depthFirstTraversal(std::string startLandmark);  //Search the graph using depth-first search non-recursive
     void dijkstra(std::string startLandmark, std::string endLandmark);  //Search the graph and find shortest distance using Dijkstra's algorithm
     void breadthFirstTraversal(std::string startLandmark);  //Traverse the graph according to the breadth first procedure
+    void findDistricts(std::string startLandmark);  //Method to assign all of the vertices a district
+    void deleteVertex(std::string startLandmark);   //Method to delete a vertex
+    void deleteEdge(std::string startLandmark, std::string endLandmark);    //Method to delete an edge between vertices
 
 protected:
 private:
     //vector<edge> edges;
     std::vector<vertex> vertices;   //Vector store all vertices
+    int districtIDIndex;
 
     void search(vertex v);  //Algorithm used with depth-first search recursive
 

@@ -10,6 +10,7 @@ using namespace std;
 Graph::Graph()
 {
     //ctor
+    districtIDIndex = 1;    //Index to keep track of how many districts
 }
 
 Graph::~Graph()
@@ -29,7 +30,7 @@ Graph::~Graph()
  Graph g;
  g.addVector("Eiffel Tower");
 
- Precondition: The string parameter has no extra spaces, and is the correct name of the landmark. The struct vertex has been declared with name and distance variables.
+ Precondition: Vector class must be included. The string parameter has no extra spaces, and is the correct name of the landmark. The struct vertex has been declared with name and distance variables.
  The vertices vector has been declared.
 
  Postcondition: The string name given will be created into a vertex and added to the vertices vector. If the name was already created as a vector the program will say that name was found.
@@ -55,6 +56,7 @@ void Graph::addVertex(string name)
         vertex v;
         v.name = name;
         v.distance = 0;
+        v.districtID = -1;
         vertices.push_back(v);
     }
 }
@@ -71,7 +73,7 @@ void Graph::addVertex(string name)
  Graph g;
  g.addEdge("Eiffel Tower", "Taj Mahal", 2000);
 
- Precondition: The vertices vector and the adjacent vector have been declared. The struct for adjVertex has been initialized with a pointer to the vector and the weight.
+ Precondition: Vector class must be included. The vertices vector and the adjacent vector have been declared. The struct for adjVertex has been initialized with a pointer to the vector and the weight.
  If no movies have been added to the vertices vector, then v1 and v2 will not be found. The starting landmark is string v1 and the ending landmark is v2.
  The weight between the landmarks will be given by int weight. All this information can be found in the generated text file.
 
@@ -118,7 +120,7 @@ void Graph::addEdge(string v1, string v2, int weight)
  Graph g;
  g.breadthFirstSearch("Stonehenge", "Golden Gate Bridge");
 
- Precondition: The vertices vector has to be declared and the vertex struct has to be declared and initialized with the corresponding variables. The adjacent vertices vector/struct has to
+ Precondition: Vector class must be included. The vertices vector has to be declared and the vertex struct has to be declared and initialized with the corresponding variables. The adjacent vertices vector/struct has to
  be declared as well with the pointer to the vertex struct. The queue class has to be included.
 
  Postcondition: Display the integer for the shortest path, and the string representation of the path taken
@@ -150,6 +152,12 @@ void Graph::breadthFirstSearch(string landmark1, string landmark2)
         {
             landmarks2 = true;
         }
+    }
+
+    if(startingLandmark->districtID == -1)
+    {
+        cout << "Districts have not been initialized" << endl;
+        return;
     }
 
     if (landmarks1 && landmarks2)
@@ -245,7 +253,7 @@ void Graph::breadthFirstSearch(string landmark1, string landmark2)
  Graph g;
  g.depthFirstTraversal("Eiffel Tower");
 
- Precondition: The vertices vector has to be initialized as well as the vertex struct. The stack class has to be included and the adjacent vector/struct has to be declared and initialized
+ Precondition: Vector class must be included. The vertices vector has to be initialized as well as the vertex struct. The stack class has to be included and the adjacent vector/struct has to be declared and initialized
  with corresponding variables.
 
  Postcondition: Will display all the vertices in the graph, in order according to depth first traversal
@@ -276,6 +284,12 @@ void Graph::depthFirstTraversal(string startLandmark)
         return;
     }
 
+    if(startingLandmark->districtID == -1)
+    {
+        cout << "Districts have not been initialized" << endl;
+        return;
+    }
+
     vertex u;   //Vertex to store the popped off vertex from the stack
 
     stack<vertex> depthStack;   //Declare the stack and push the starting vertex on
@@ -288,16 +302,14 @@ void Graph::depthFirstTraversal(string startLandmark)
 
         tracker++;  //Increment tracker for a new vertex being visited
 
-        bool visited = true;
-
         //If all vertices have been visited, print accordingly
         if (tracker == 10)
         {
-            cout << u.name << endl;
+            cout << u.districtID << ":" << u.name << endl;
         }
         else
         {
-            cout << u.name << ", ";
+            cout << u.districtID << ":" << u.name << ", ";
         }
 
         //Loop through all adjacent vertices, visit them, and push them onto the stack
@@ -323,12 +335,13 @@ void Graph::depthFirstTraversal(string startLandmark)
  Graph g;
  g.depthFirstTraversalRecursive("Eiffel Tower");
 
- Precondition: The search method must be implemented. The vertices vector and vertex struct must be declared and initialized with the corresponding variables.
+ Precondition: Vector class must be included. The search method must be implemented. The vertices vector and vertex struct must be declared and initialized with the corresponding variables.
  The adjacent vector/struct must be implemented with the corresponding variables.
 
  Postcondition: Will display all the vertices in the graph, in order according to depth first recursive traversal
  */
-void Graph::depthFirstTraversalRecursive(string startLandmark){
+void Graph::depthFirstTraversalRecursive(string startLandmark)
+{
     vertex *startingLandmark = NULL;    //Vertex to store the starting landmark
 
     bool landmark1 = false; //Boolean to check if the starting vertex has been found
@@ -354,22 +367,27 @@ void Graph::depthFirstTraversalRecursive(string startLandmark){
         return;
     }
 
-    cout << startingLandmark->name << ", ";    //Print out the starting landmark
+    if(startingLandmark->districtID == -1)
+    {
+        cout << "Districts have not been initialized" << endl;
+        return;
+    }
+
+    cout << startingLandmark->districtID << ":" << startingLandmark->name << ", ";    //Print out the starting landmark
 
     //Loop through all adjacent vertices to starting landmark and print it out
     for (int i = 0; i < startingLandmark->adj.size(); i++)
     {
         if (startingLandmark->adj[i].v->visited == false)
         {
-            cout << startingLandmark->adj[i].v->name << ", ";
-            startingLandmark->adj[i].v->visited = true;\
+            cout << startingLandmark->adj[i].v->districtID << ":" << startingLandmark->adj[i].v->name << ", ";
+            startingLandmark->adj[i].v->visited = true;
 
             //Call the search method to start printing out all adjacent vertices depth first
             search(*startingLandmark->adj[i].v);
 
         }
     }
-    cout << endl;
 
 }
 
@@ -383,7 +401,7 @@ void Graph::depthFirstTraversalRecursive(string startLandmark){
  Graph g;
  search(*startingLandmark->adj[i].v) [This is a private method so it does not need to be called from graph g]
 
- Precondition: The depth first recursive traversal must be implemented as well as the vertex struct and vertices vector with corresponding variables.
+ Precondition: Vector class must be included. The depth first recursive traversal must be implemented as well as the vertex struct and vertices vector with corresponding variables.
  The adjacent vector and struct must be declared and implemented for each vector.
 
  Postcondition: Will display all the vertices in the graph, in order according to depth first recursive traversal
@@ -410,11 +428,11 @@ void Graph::search(vertex u)
             }
             if (visited)
             {
-                cout << u.adj[i].v->name << endl;
+                cout << u.adj[i].v->districtID << ":" << u.adj[i].v->name << endl;
             }
             else
             {
-                cout << u.adj[i].v->name << ", ";
+                cout << u.adj[i].v->districtID << ":" << u.adj[i].v->name << ", ";
             }
 
             //Recursively call search with the adjacent vertex to print all vertices with depth first
@@ -434,7 +452,7 @@ void Graph::search(vertex u)
  Graph g;
  g.breadthFirstTraversal("Eiffel Tower");
 
- Precondition: The vertices vector and vertex struct must be declared and initialized with the corresponding variables.
+ Precondition: Vector class must be included. The vertices vector and vertex struct must be declared and initialized with the corresponding variables.
  The adjacent vector/struct must be implemented with the corresponding variables. The queue class must be included.
 
  Postcondition: Will display all the vertices in the graph, in order according to breadth first traversal
@@ -463,7 +481,13 @@ void Graph::breadthFirstTraversal(string startLandmark)
         return;
     }
 
-    cout << startingLandmark->name << ", "; //Print out the starting landmark
+    if(startingLandmark->districtID == -1)
+    {
+        cout << "Districts have not been initialized" << endl;
+        return;
+    }
+
+    cout << startingLandmark->districtID << ":" << startingLandmark->name << ", "; //Print out the starting landmark
 
     vertex u;   //Vertex to store the vertex to be popped off the queue
 
@@ -496,11 +520,11 @@ void Graph::breadthFirstTraversal(string startLandmark)
                 //Print out the vertex according to the value of visited
                 if (visited)
                 {
-                    cout << u.adj[i].v->name << endl;
+                    cout << u.adj[i].v->districtID << ":" << u.adj[i].v->name << endl;
                 }
                 else
                 {
-                    cout << u.adj[i].v->name << ", ";
+                    cout << u.adj[i].v->districtID << ":" << u.adj[i].v->name << ", ";
                 }
 
                 //Push the adjacent vertex onto the queue
@@ -521,7 +545,7 @@ void Graph::breadthFirstTraversal(string startLandmark)
  Graph g;
  g.dijkstra("Niagara Falls", "Eiffel Tower");
 
- Precondition: The vertex struct and vertices vector must be implemented will all corresponding variables including the pointer to the previous vertex.
+ Precondition: Vector class must be included. The vertex struct and vertices vector must be implemented will all corresponding variables including the pointer to the previous vertex.
  The vector class must be included and the adjacent vector/struct must be declared and implemented. The limits.h class must be included.
 
  Postcondition: Will print the shortest distance between two landmarks and the string path taken between the landmarks.
@@ -554,6 +578,12 @@ void Graph::dijkstra(string startLandmark, string endLandmark)
     if(A.name == "NULL" || B.name == "NULL")
     {
         cout << "One or more landmarks doesn't exist or the start and end landmark are the same" << endl;
+        return;
+    }
+
+    if(A.districtID == -1)
+    {
+        cout << "Districts have not been initialized" << endl;
         return;
     }
 
@@ -677,4 +707,186 @@ void Graph::dijkstra(string startLandmark, string endLandmark)
         }
 
         return;
+}
+
+/*
+ Function Prototype:
+ void Graph::findDistricts(string)
+
+ Function Description: This method will assign all connected components a district. Initially, all landmarks are connect, however,
+ some landmarks may be deleted.
+
+ Example:
+ Graph g;
+ g.findDistricts("Golden Gate Bridge");
+
+ Precondition: Vector class must be included. The vertex struct must be initialized with all corresponding variables. All vertices must have a variable to store district ID.
+ The queue class must be included. The adjacent vector/struct must be implemented with the corresponding variables declared in the struct.
+
+ Postcondition: Will assign all connected components in the graph a district. If the graph is split into two different connected components, they
+ will have different districts.
+ */
+void Graph::findDistricts(string startLandmark)
+{
+    vertex startingLandmark;
+    bool foundLandmark = false;
+
+    //Loop through all the vertices and set the visited to false
+    for(int j = 0; j < vertices.size(); j++)
+    {
+        if(vertices[j].districtID == -1)
+            vertices[j].visited = false;
+    }
+
+    //Loop through all the vertices and set the starting landmark to true, set the district ID and set startingLandmark to the starting landmark
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        if(vertices[i].name == startLandmark)
+        {
+            foundLandmark = true;
+            vertices[i].visited = true;
+            vertices[i].districtID = districtIDIndex;
+            startingLandmark = vertices[i];
+            break;
+        }
+    }
+
+    if(!foundLandmark)
+    {
+        cout << "The landmark does not exist" << endl;
+        return;
+    }
+
+    //Set starting landmark visited to true and created a queue of vertices
+    startingLandmark.visited = true;
+
+    queue <vertex> districtQueue;   //Queue to store all vertices in a district
+
+    //Add the starting vertex to the queue
+    districtQueue.push(startingLandmark);
+
+    //Loop while the queue is not empty
+    while(!districtQueue.empty())
+    {
+        //Set vertex u to the next element
+        //Pop the next element off the queue
+        vertex u = districtQueue.front();
+        districtQueue.pop();
+
+        //Loop through all adjacent vertices
+        for(int a = 0; a < u.adj.size(); a++)
+        {
+            if(u.adj[a].v->visited == false)
+            {
+                //Set the adjacent vertices visited to true
+                //Set the adjacent vertices district ID
+                u.adj[a].v->visited = true;
+                u.adj[a].v->districtID = districtIDIndex;
+
+                //Push the adjacent vertex onto the queue
+                districtQueue.push(*u.adj[a].v);
+            }
+        }
+    }
+
+    //Loop through all of the vertices
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        //Find the next vertex not visited and increment the district ID
+        //Recursively call findDistricts with the found vertex
+        if(vertices[i].visited == false)
+        {
+            districtIDIndex++;
+            findDistricts(vertices[i].name);
+        }
+    }
+}
+
+/*
+ Function Prototype:
+ void Graph::deleteEdge(string, string)
+
+ Function Description: This method will take in two string which will find two landmarks and delete the edge between the vertices and then update the districts
+
+ Example:
+ Graph g;
+ g.deleteEdge("Golden Gate Bridge", "Niagara Falls")
+
+ Precondition: Vector class must be included. The vertex struct with corresponding variables must be initialized as well as the vertices vector. The adjacent vector/struct
+ must be declared and initialized with corresponding variables. The find districts method must be implemented.
+
+ Postcondition: Will delete the edge between two adjacent vertices and update the districts in the graph.
+ */
+void Graph::deleteEdge(string startLandmark, string endLandmark)
+{
+    //Vertices to store the starting and ending landmarks
+    vertex *startingLandmark = NULL;
+    vertex *endingLandmark = NULL;
+
+    //Boolean to store if the start and end landmarks have been found
+    bool foundStart = false;
+    bool foundEnd = false;
+
+    //Loop through all vertices looking for the starting and ending landmarks
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        if(vertices[i].name == startLandmark)
+        {
+            startingLandmark = &vertices[i];
+            foundStart = true;
+        }
+
+        if(vertices[i].name == endLandmark && startLandmark != endLandmark)
+        {
+            endingLandmark = &vertices[i];
+            foundEnd = true;
+        }
+
+    }
+
+    //If the landmarks were not found
+    if(!foundEnd || !foundStart)
+    {
+        cout << "One of the landmarks does not exist or they are the same landmark" << endl;
+        return;
+    }
+
+    if(startingLandmark->districtID == -1)
+    {
+        cout << "Districts have not been initialized" << endl;
+        return;
+    }
+
+    //Boolean to store if the vertices are adjacent
+    bool adjacentVertices = false;
+
+    //Loop through all adjacent vertices for starting landmark and if end landmark is found, erase it
+    for(int i = 0; i < startingLandmark->adj.size(); i++)
+    {
+        if(startingLandmark->adj[i].v->name == endLandmark)
+        {
+            startingLandmark->adj.erase(startingLandmark->adj.begin()+i);
+            adjacentVertices = true;
+        }
+    }
+
+    //If the vertices are not adjacent
+    if(!adjacentVertices)
+    {
+        cout << "The vertices are not connected" << endl;
+        return;
+    }
+
+    //Loop through all adjacent vertices to ending landmark and delete starting landmark
+    for(int i = 0; i < endingLandmark->adj.size(); i++)
+    {
+        if(endingLandmark->adj[i].v->name == startLandmark)
+        {
+            endingLandmark->adj.erase(endingLandmark->adj.begin()+i);
+        }
+    }
+
+    //Re find all districts for the graph
+    findDistricts(startLandmark);
+
 }

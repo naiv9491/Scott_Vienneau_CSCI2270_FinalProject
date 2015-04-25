@@ -117,11 +117,12 @@ LOOP:while(1 == 1)
     //Print out the main menu with all options
     cout << "===== Main Menu =====" << endl;
     cout << "1. Print Vertices" << endl;
-    cout << "2. Find Shortest Path" << endl;
-    cout << "3. Find Shortest Distance" << endl;
-    cout << "4. Primm's Minimum Spanning Tree Algorithm" << endl;
-    cout << "5. Brute Force Traveling Salesman Problem" << endl;
-    cout << "6. Quit" << endl;
+    cout << "2. Initialize Districts" << endl;
+    cout << "3. Find Shortest Path" << endl;
+    cout << "4. Find Shortest Distance" << endl;
+    cout << "5. Delete Vertex" << endl;
+    cout << "6. Delete Edge" << endl;
+    cout << "7. Quit" << endl;
 
     //Get user input on what option to run
     string userInput = "";
@@ -163,6 +164,13 @@ LOOP:while(1 == 1)
 
     else if(userInput == "2")
     {
+        userInput = "";
+
+        g.findDistricts(landmarks[0]);
+    }
+
+    else if(userInput == "3")
+    {
 
         //Two variables to keep track of each city
         string landmark1;
@@ -178,7 +186,7 @@ LOOP:while(1 == 1)
 
     }
 
-    else if(userInput == "3")
+    else if(userInput == "4")
     {
         //Find shortest distance between two cities using Dijkstra's algorithm
         string landmark1;
@@ -191,7 +199,7 @@ LOOP:while(1 == 1)
         g.dijkstra(landmark1, landmark2);
     }
 
-    else if(userInput == "4")
+    else if(userInput == "5")
     {
         //Find the minimum spanning tree using Primm
         string landmark1;
@@ -201,17 +209,21 @@ LOOP:while(1 == 1)
 
     }
 
-    else if(userInput == "5")
+    else if(userInput == "6")
     {
         //Solve the traveling salesman problem using brute force
         string landmark1;
+        string landmark2;
         cout << "Enter a starting landmark:" << endl;
         getline(cin, landmark1);
+        cout << "Enter an ending landmark:" << endl;
+        getline(cin, landmark2);
         userInput = "";
 
+        g.deleteEdge(landmark1, landmark2);
     }
 
-    else if(userInput == "6")
+    else if(userInput == "7")
     {
         //If user wants to quit
         cout << "Goodbye!" << endl;
