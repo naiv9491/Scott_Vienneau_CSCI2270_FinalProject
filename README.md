@@ -15,7 +15,7 @@ How to Run
 ------------
 Dependencies
 ------------
-Our program does use some functionality from C++ 11, so whatever compiler you are using must be able to recognize those functions calls. Depending on the IDE/Compiler, there are settings which can enable the compiler to recognize C++ 11.
+Our program does use some functionality from C++ 11, so whatever compiler you are using must be able to recognize those functions calls. Depending on the IDE/Compiler, there are settings which can enable the compiler to recognize C++ 11. Also, the folder which contains the project must have the Landmarks.txt file or the program will not run correctly.
 
 -------------------
 System Requirements
@@ -34,4 +34,4 @@ There have been no contributors thus far.
 ------------------
 Open Issues & Bugs
 ------------------
-There are no issues/bugs thus far.
+Currently, the deleteVertex method does not actually deleted/free up memory associated with a vertex, however, it just pseudo-deletes the vertex by nullifying all values in the vertex struct. For example, it will set the distance to 0, eraseID to -10 and name to be "". By doing this, the deleted vertex will not be found in any of the search, shortest path, or shortest distance algorithms. If anyone would like to try and enhance our program by trying to fully delete the vertex it would be greatly appreciated. We were having trouble with getting correct adjacent vertices for all remaining vertices in the vertices vector.
