@@ -875,8 +875,6 @@ void Graph::deleteEdge(string startLandmark, string endLandmark)
     }
     else if(startingLandmark->districtID != endingLandmark->districtID && (startingLandmark->erasedID != -10 && endingLandmark->erasedID != -10))
     {
-        cout << startingLandmark->erasedID << endl << endingLandmark->erasedID << endl;
-        cout << startingLandmark->districtID << endl << endingLandmark->districtID << endl;
         cout << "The two landmarks have different districts" << endl;
         return;
     }
