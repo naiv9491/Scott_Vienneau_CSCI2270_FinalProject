@@ -1,6 +1,6 @@
-==============
+Documentation file for the Graph Class
+
 1. Add Vertex
-==============
 Function Prototype:
  void Graph::addVertex(string)
 
@@ -11,8 +11,12 @@ Function Prototype:
  Example:
  Graph g;
  g.addVector("Eiffel Tower");
+ 
+ Expected Input: String for a landmark (string)
+ 
+ Expected Output: There are no outputs, but a vertex will be created and added to the vertices struct. If the name for the landmark has already been found, the program will display that the landmark was found.
 
- Precondition: Vector class must be included. The string parameter has no extra spaces, and is the correct name of the landmark. The struct vertex has been declared with name and distance variables.
+ Precondition: Vector class must be included. The string parameter has no extra spaces, and is the correct name of the landmark. The struct vertex has been declared with all corresponding variables.
  The vertices vector has been declared.
 
  Postcondition: The string name given will be created into a vertex and added to the vertices vector. If the name was already created as a vector the program will say that name was found.
@@ -28,9 +32,13 @@ Function Prototype:
  Example:
  Graph g;
  g.addEdge("Eiffel Tower", "Taj Mahal", 2000);
+ 
+ Expected Input: Two strings for two landmarks where an edge needs to be added and an integer for the weight of the edge.
+ 
+ Expected Output: No expected outputs. The edge will be created and the adjacent vertices vector will be updated with an adjacent vertex in both directions.
 
  Precondition: Vector class must be included. The vertices vector and the adjacent vector have been declared. The struct for adjVertex has been initialized with a pointer to the vector and the weight.
- If no movies have been added to the vertices vector, then v1 and v2 will not be found. The starting landmark is string v1 and the ending landmark is v2.
+ If no landmarks have been added to the vertices vector, then v1 and v2 will not be found. The starting landmark is string v1 and the ending landmark is v2.
  The weight between the landmarks will be given by int weight. All this information can be found in the generated text file.
 
  Postcondition: An edge will be added between the two vertices with the corresponding weight. The adjacent vector for v1 will have v2 added, and the adjacent vector
@@ -41,46 +49,60 @@ Function Prototype:
  void Graph::breadthFirstSearch(string, string)
 
  Function Description:
- This method takes in two parameters and returns the shortest path between the two cities
+ This method takes in two parameters and returns the shortest number of edges between the two landmarks.
 
  Example:
  Graph g;
  g.breadthFirstSearch("Stonehenge", "Golden Gate Bridge");
+ 
+ Expected Input: Two strings to represent the starting and ending landmark to find the shortest path.
+ 
+ Expected Output: The program should display the number of edges and the path taken between the starting and ending landmark delimited by commas.
 
  Precondition: Vector class must be included. The vertices vector has to be declared and the vertex struct has to be declared and initialized with the corresponding variables. The adjacent vertices vector/struct has to
  be declared as well with the pointer to the vertex struct. The queue class has to be included.
 
- Postcondition: Display the integer for the shortest path, and the string representation of the path taken
+ Postcondition: Display the integer for the shortest path, and the string representation of the path taken delimited by commas.
 
 4. Depth First Traversal 
 Function Prototype:
  void Graph::depthFirstTraversal(string)
 
- Function Description: This method prints all the vertices according to the 'depth first' traversal procedure
+ Function Description: This method prints all the vertices according to the 'depth first' traversal procedure. The vertices will be printed out by going deeper into the
+ graph before going sideways or beadth-first.
 
  Example:
  Graph g;
  g.depthFirstTraversal("Eiffel Tower");
+ 
+ Expected Input: One string to represent the landmark to start the traversal from
+ 
+ Expected Ouput: The landmarks visited depth-first with each landmarks district ID.
 
  Precondition: Vector class must be included. The vertices vector has to be initialized as well as the vertex struct. The stack class has to be included and the adjacent vector/struct has to be declared and initialized
  with corresponding variables.
 
- Postcondition: Will display all the vertices in the graph, in order according to depth first traversal
+ Postcondition: Will display all the vertices names in the graph, in order according to depth first traversal
 
 5. Depth First Traversal Recursive
 Function Prototype:
  void Graph::depthFirstTraversalRecursive(string)
 
- Function Description: This method prints all the vertices according to the 'depth first' recursive traversal procedure
+ Function Description: This method prints all the vertices according to the 'depth first' recursive traversal procedure. Depth first prints out the vertices in the graph
+ by going deeper into the graph rather than side-by-side or breadth first.
 
  Example:
  Graph g;
  g.depthFirstTraversalRecursive("Eiffel Tower");
+ 
+ Expected Input: One string to represent the starting landmark of the traversal
+ 
+ Expected Output: The vertices names in order of the recursive depth-first traversal with district ID's.
 
  Precondition: Vector class must be included. The search method must be implemented. The vertices vector and vertex struct must be declared and initialized with the corresponding variables.
  The adjacent vector/struct must be implemented with the corresponding variables.
 
- Postcondition: Will display all the vertices in the graph, in order according to depth first recursive traversal
+ Postcondition: Will display all the vertices names in the graph, in order according to depth first recursive traversal
 
 6. Search
 Function Prototype:
@@ -91,52 +113,70 @@ Function Prototype:
  Example:
  Graph g;
  search(*startingLandmark->adj[i].v) [This is a private method so it does not need to be called from graph g]
+ 
+ Expected Input: A vertex from the depth-first recursive traversal method which will be used to continue printing the vertices depth first.
+ 
+ Expected Output: The vertices names in order of the recursive depth-first traversal with district ID's.
 
  Precondition: Vector class must be included. The depth first recursive traversal must be implemented as well as the vertex struct and vertices vector with corresponding variables.
  The adjacent vector and struct must be declared and implemented for each vector.
 
- Postcondition: Will display all the vertices in the graph, in order according to depth first recursive traversal
+ Postcondition: Will display all the vertices names in the graph, in order according to depth first recursive traversal
 
 7. Breadth First Traversal
 Function Prototype:
  void Graph::breadthFirstTraversal(string)
 
- Function Description: This method prints all the vertices according to the 'breadth first' traversal procedure
+ Function Description: This method prints all the vertices according to the 'breadth first' traversal procedure which traverses the tree side-by-side rather
+ than depth first.
 
  Example:
  Graph g;
  g.breadthFirstTraversal("Eiffel Tower");
+ 
+ Expected Input: String to store the starting landmark of the traversal.
+ 
+ Expected Output: The vertices names in order by breadth-first with each district ID.
 
  Precondition: Vector class must be included. The vertices vector and vertex struct must be declared and initialized with the corresponding variables.
  The adjacent vector/struct must be implemented with the corresponding variables. The queue class must be included.
 
- Postcondition: Will display all the vertices in the graph, in order according to breadth first traversal
+ Postcondition: Will display all the vertices names in the graph, in order according to breadth first traversal
 
 8. Dijkstra
 Function Prototype:
  void Graph::dijkstra(string, string)
 
- Function Description: This method will find the shortest distance between two landmarks in a weighted graph.
+ Function Description: This method will find the shortest weighted distance between two landmarks in a weighted graph.
 
  Example:
  Graph g;
  g.dijkstra("Niagara Falls", "Eiffel Tower");
+ 
+ Expected Input: Two strings which correspond to the starting landmark and ending landmark of the shortest distance search.
+ 
+ Expected Output: The shortest weighted distance followed by the path taken through the landmarks delimited by commas.
 
  Precondition: Vector class must be included. The vertex struct and vertices vector must be implemented will all corresponding variables including the pointer to the previous vertex.
  The vector class must be included and the adjacent vector/struct must be declared and implemented. The limits.h class must be included.
 
- Postcondition: Will print the shortest distance between two landmarks and the string path taken between the landmarks.
+ Postcondition: Will print the shortest distance between two landmarks and the string path taken between the landmarks, delimited by commas.
 
 9. Find Districts
 Function Prototype:
  void Graph::findDistricts(string)
 
- Function Description: This method will assign all connected components a district. Initially, all landmarks are connect, however,
+ Function Description: This method will assign all landmarks a district. Initially, all landmarks are connect, so they will have the same district, however,
  some landmarks may be deleted.
 
  Example:
  Graph g;
  g.findDistricts("Golden Gate Bridge");
+ 
+ Expected Input: String which will be used to start the traversal assigning all landmarks a district. It does not matter which landmark is the parameter,
+ as long as the landmark exists. The traversal algorithm will find all landmarks, even if they are not connected.
+ 
+ Expected Output: No output is expected, however, all landmarks will be assigned a district.
 
  Precondition: Vector class must be included. The vertex struct must be initialized with all corresponding variables. All vertices must have a variable to store district ID.
  The queue class must be included. The adjacent vector/struct must be implemented with the corresponding variables declared in the struct.
@@ -153,6 +193,11 @@ Function Prototype:
  Example:
  Graph g;
  g.deleteEdge("Golden Gate Bridge", "Niagara Falls")
+ 
+ Expected Input: Two strings to correspond to two vertices which you want the edge to be deleted. The edge will be deleted in both directions,
+ so the order of the string parameters does not matter.
+ 
+ Expected Output: There is no expected output, however, the program will delete the edge so be aware of which edge you are deleting.
 
  Precondition: Vector class must be included. The vertex struct with corresponding variables must be initialized as well as the vertices vector. The adjacent vector/struct
  must be declared and initialized with corresponding variables. The find districts method must be implemented.
@@ -163,16 +208,18 @@ Function Prototype:
 Function Prototype:
  void Graph::deleteVertex(string)
  
- Function Description: This method will take a string for the name of a landMark, and delete it from the graph structure
+ Function Description: This method will take a string for the name of a landmark, and delete it from the graph structure as well as all adjacent edges.
  
  Example:
  Graph g;
  g.deleteVertex("Golden Gate Bridge")
  
+ Expected Input: A string to correspond to the vertex you want deleted
+ 
+ Expected Output: No expected output, however, expect the vertex to be deleted so all traversal algorithms as well as the shortest path and 
+ distance algorithms to produce different results than before the deletion of the vertex. Districts will be updated as well.
+ 
  Precondition: Vector class must be included. The vertex struct with corresponding variables must be initialized as well as the vertices vector. The adjacent vector/struct
- must be declared and initialized with corresponding variables. The find districts method must be implemented.
+ must be declared and initialized with corresponding variables. The findDistricts method as well as the deleteEdge method must be implemented.
  
  Postcondition: Will delete the vertex representing the landmark in the graph structure.
-
-
-
