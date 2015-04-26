@@ -1,4 +1,6 @@
+==============
 1. Add Vertex
+==============
 Function Prototype:
  void Graph::addVertex(string)
 
