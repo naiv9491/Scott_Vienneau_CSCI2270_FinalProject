@@ -19,6 +19,7 @@ struct vertex{
     std::vector<adjVertex> adj; //Vector to store all adjacent vertices
     vertex *previous;   //Pointer to point to the previous vertex for use in Dijkstra's algorithm
     int districtID; //Integer to store the ID of the vertex district
+    int erasedID;   //Integer to store if a vertex was erased
 };
 
 //Queue vertex used in Dijkstra'a algorithm
@@ -42,16 +43,16 @@ public:
     void breadthFirstTraversal(std::string startLandmark);  //Traverse the graph according to the breadth first procedure
     void findDistricts(std::string startLandmark);  //Method to assign all of the vertices a district
     void deleteEdge(std::string startLandmark, std::string endLandmark);    //Method to delete an edge between vertices
-    void deleteVertex(std::string landMark);
-    
+    void deleteVertex(std::string landMark);    //Method to delete a vertex from the graph
+
 protected:
 private:
     //vector<edge> edges;
     std::vector<vertex> vertices;   //Vector store all vertices
     int districtIDIndex;
-    
+
     void search(vertex v);  //Algorithm used with depth-first search recursive
-    
+
 };
 
 #endif // GRAPH_H
