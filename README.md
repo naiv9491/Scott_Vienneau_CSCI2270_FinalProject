@@ -22,6 +22,7 @@ How to Run
 
   Type in this code to run the program:
       g++ -std=c++11 main.cpp Graph.cpp Graph.h
+      
       ./a.out
       
   Note that this will not work if main.cpp, Graph.cpp, Graph.h, and Landmarks.txt are not in the same folder.
