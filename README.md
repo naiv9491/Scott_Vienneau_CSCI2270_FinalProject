@@ -13,8 +13,10 @@ How to Run
 ----------
 1. Clone Scott_Vienneau_CSCI2270_FinalProject to your computer. 
 (git clone https://github.com/tylersco/Scott_Vienneau_CSCI2270_FinalProject.git)
+
 2. If you are using Code::Blocks open up the project by double clicking the GraphExpansion_GlobalLandmarks_CSCI2270.cbp file in the GraphExpansion_GlobalLandmarks_CSCI2270 folder and click the Compile and Run button. 
    If you are not using Code::Blocks you need to create a new project in some C++ IDE using a C++ 11 compiler and add the 'main.cpp', 'Graph.cpp', and 'Graph.h' files in the GraphExpansion_GlobalLandmarks_CSCI2270 folder. Also, make sure the 'Landmarks.txt' file is in your new project directory. After completing these steps you can run the program through your own IDE. 
+
    If you wish to run your code through command line, you must be in the GraphExpansion_GlobalLandmarks_CSCI2270 folder by using a command such as 'cd'. Once you are there, cd into the src folder and copy the Graph.cpp into the GraphExpansion_GlobalLandmarks_CSCI2270 folder's main level so that the Graph.cpp and main.cpp are in the same folder. Next, go into the include folder and copy the Graph.h file into the GraphExpansion_GlobalLandmarks_CSCI2270 folder's main level so that itself, the Graph.cpp file, and the main.cpp file are in the same folder. Once here, you should be able to call the ls function or something similar depending on the shell and see 'main.cpp', 'Graph.cpp', 'Graph.h' and 'Landmarks.txt' all in the same level of the project folder.
 
   Type in this code to run the program:
