@@ -12,6 +12,7 @@ Our project is an expansion on the Graph data structure. We will be implementing
 How to Run
 ----------
 
+
 ------------
 Dependencies
 ------------
@@ -20,6 +21,7 @@ Our program does use some functionality from C++ 11, so whatever compiler you ar
 -------------------
 System Requirements
 -------------------
+Our program is not Operating System/IDE dependent. You can run the program on any operating system or IDE as long as you have a C++ 11 compiler. The program was made in Code::Blocks on Linux so that would be the easiest IDE since there is a project file for Code::Blocks. If you are using a different IDE such as XCode, you might need to create a new project, and add 'main.cpp', 'Graph.h', and 'Graph.cpp' to the project. Lastly, you must add the 'Landmarks.txt' file in the newly created project for the program to execute correctly.
 
 -------------
 Group Members
