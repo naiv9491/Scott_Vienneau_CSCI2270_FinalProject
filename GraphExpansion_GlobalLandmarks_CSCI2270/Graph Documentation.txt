@@ -223,3 +223,22 @@ Function Prototype:
  must be declared and initialized with corresponding variables. The findDistricts method as well as the deleteEdge method must be implemented.
  
  Postcondition: Will delete the vertex representing the landmark in the graph structure.
+ 
+ 12. Display Edges
+ Function Prototype:
+  void Graph::displayEdges()
+  
+  Function Description: This method will print out all vertices and all adjacent vertices.
+  
+ Example:
+ Graph g;
+ g.displayEdges();
+ 
+ Expected Input: No expected input
+ 
+ Expected Output: Expect to print out all vertices with an arrow pointing to it's adjacent vertices. If the districts are not intialized, an error message will be displayed.
+
+ Precondition: Districts must be initialized and the vertex struct and vertices vector must be initialized with corresponding variables. The adjacent vector/struct
+ must also be declared and initialized.
+
+ Postcondition: Will print out all of the vertices with an arrow pointing to all of the adjacent vertices
