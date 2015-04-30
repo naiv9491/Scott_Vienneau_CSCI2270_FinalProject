@@ -993,3 +993,45 @@ void Graph::deleteVertex(string landMark)
     }
 
 }
+
+
+/*
+ Function Prototype:
+ void Graph::displayEdges();
+
+ Function Description: This method will print out all vertices and all adjacent vertices
+
+ Example:
+ Graph g;
+ g.displayEdges();
+
+ Precondition: Districts must be initialized and the vertex struct and vertices vector must be initialized with corresponding variables. The adjacent vector/struct
+ must also be declared and initialized.
+
+ Postcondition: Will print out all of the vertices with an arrow pointing to all of the adjacent vertices
+ */
+
+void Graph::displayEdges()
+{
+
+    //loop through all vertices and adjacent vertices
+    for(int i = 0; i < vertices.size(); i++)
+    {
+        if(vertices[i].name != "")
+        {
+            if(vertices[i].districtID == -1)
+            {
+                cout << "Districts have not been initialized" << endl;
+                return;
+            }
+            cout<<vertices[i].districtID << ":" << vertices[i].name<<"-->";
+            for(int j = 0; j < vertices[i].adj.size(); j++)
+            {
+                cout<<vertices[i].adj[j].v->name;
+                if(j != vertices[i].adj.size()-1)
+                    cout << "***";
+            }
+            cout<<endl;
+        }
+    }
+}

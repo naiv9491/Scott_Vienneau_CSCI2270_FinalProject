@@ -44,6 +44,7 @@ public:
     void findDistricts(std::string startLandmark);  //Method to assign all of the vertices a district
     void deleteEdge(std::string startLandmark, std::string endLandmark);    //Method to delete an edge between vertices
     void deleteVertex(std::string landMark);    //Method to delete a vertex from the graph
+    void displayEdges();    //Display all edges and vertices
 
 protected:
 private:

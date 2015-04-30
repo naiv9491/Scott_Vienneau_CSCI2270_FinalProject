@@ -112,23 +112,33 @@ int main()
         }
     }
 
+    cout << "This program will replicate a group of routes connecting global landmarks." << endl;
+    cout << "If all of the landmarks are connected by routes they" << endl <<  "will be in the same district, however, after deleting some landmarks" << endl << "and routes the districts may change." << endl;
+    cout << "You will be able to delete landmarks and routes" << endl << "and print out landmarks via useful Graph algorithms." << endl << endl;
+
 LOOP:while(1 == 1)
 {
     //Print out the main menu with all options
     cout << "===== Main Menu =====" << endl;
-    cout << "1. Print Vertices" << endl;
-    cout << "2. Initialize Districts" << endl;
-    cout << "3. Find Shortest Path" << endl;
-    cout << "4. Find Shortest Distance" << endl;
-    cout << "5. Delete Edge" << endl;
-    cout << "6. Delete Vertex" << endl;
-    cout << "7. Quit" << endl;
+    cout << "1. Display All Landmarks" << endl;
+    cout << "2. Print Landmarks" << endl;
+    cout << "3. Initialize Districts" << endl;
+    cout << "4. Find Shortest Path" << endl;
+    cout << "5. Find Shortest Distance" << endl;
+    cout << "6. Delete Route" << endl;
+    cout << "7. Delete Landmark" << endl;
+    cout << "8. Quit" << endl;
 
     //Get user input on what option to run
     string userInput = "";
     getline(cin, userInput);
 
     if(userInput == "1")
+    {
+        g.displayEdges();
+    }
+
+    else if(userInput == "2")
     {
         cout << "1. Breadth First Traversal" << endl;
         cout << "2. Depth First Traversal" << endl;
@@ -162,14 +172,15 @@ LOOP:while(1 == 1)
 
     }
 
-    else if(userInput == "2")
+    else if(userInput == "3")
     {
         userInput = "";
 
         g.findDistricts(landmarks[0]);
+        cout << "The number now appearing in front of all the landmarks when " << endl << "printing them out is the district it is in." << endl;
     }
 
-    else if(userInput == "3")
+    else if(userInput == "4")
     {
 
         //Two variables to keep track of each city
@@ -186,7 +197,7 @@ LOOP:while(1 == 1)
 
     }
 
-    else if(userInput == "4")
+    else if(userInput == "5")
     {
         //Find shortest distance between two cities using Dijkstra's algorithm
         string landmark1;
@@ -199,7 +210,7 @@ LOOP:while(1 == 1)
         g.dijkstra(landmark1, landmark2);
     }
 
-    else if(userInput == "5")
+    else if(userInput == "6")
     {
         //Delete the edge between two vertices
         string landmark1;
@@ -213,7 +224,7 @@ LOOP:while(1 == 1)
         g.deleteEdge(landmark1, landmark2);
     }
 
-    else if(userInput == "6")
+    else if(userInput == "7")
     {
         //Delete a vertex from the graph
         string landmark1;
@@ -224,7 +235,7 @@ LOOP:while(1 == 1)
         g.deleteVertex(landmark1);
     }
 
-    else if (userInput == "7")
+    else if (userInput == "8")
     {
         //If the user wants to quit
         cout << "Goodbye!" << endl;
