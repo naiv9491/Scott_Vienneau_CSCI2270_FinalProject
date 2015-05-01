@@ -986,9 +986,12 @@ void Graph::deleteVertex(string landMark)
     {
         if (vertices[i].name == landMark)
         {
+            vertices.erase(vertices.begin()+i);
+            /*
             vertices[i].name = "";
             vertices[i].erasedID = -10;
             vertices[i].distance = 0;
+            */
         }
     }
 
